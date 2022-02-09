@@ -1,12 +1,11 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-Only-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 package e2
 
 import (
 	"context"
-	"fmt"
 	"testing"
 
 	e2api "github.com/onosproject/onos-api/go/onos/e2t/e2/v1beta1"
@@ -112,8 +111,6 @@ func (s *TestSuite) TestControl(t *testing.T) {
 	assert.NoError(t, err)
 	response, err := node.Control(ctx, request)
 	assert.NoError(t, err)
-	fmt.Printf("Control Outcome Payload is\n%v", response)
-	//t.Logf("Control Outcome Payload is\n%v", hex.Dump(response.Payload))
 
 	assert.NotNil(t, response)
 	assert.NotNil(t, response.Payload)

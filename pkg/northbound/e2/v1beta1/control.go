@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-Only-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 package v1beta1
 
@@ -173,7 +173,7 @@ func (s *ControlServer) Control(ctx context.Context, request *e2api.ControlReque
 	if ack != nil {
 		outcomeProtoBytes := make([]byte, 0)
 		var co *e2ap_commondatatypes.RiccontrolOutcome
-		for _, v := range failure.GetProtocolIes() {
+		for _, v := range ack.GetProtocolIes() {
 			if v.Id == int32(v2.ProtocolIeIDRiccontrolOutcome) {
 				co = v.GetValue().GetCo()
 				break

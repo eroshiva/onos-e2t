@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2020-present Open Networking Foundation <info@opennetworking.org>
 //
-// SPDX-License-Identifier: LicenseRef-ONF-Member-Only-1.0
+// SPDX-License-Identifier: Apache-2.0
 
 package e2ap
 
@@ -127,13 +127,13 @@ func (c *threadSafeConn) processSends() {
 
 // processSend processes a send
 func (c *threadSafeConn) processSend(msg *e2appdudescriptions.E2ApPdu) error {
-	log.Warnf("Obtained message to encode is:\n%v", msg)
+	log.Debugf("Obtained message to encode is:\n%v", msg)
 	bytes, err := encoder.PerEncodeE2ApPdu(msg)
 	if err != nil {
 		log.Warn(err)
 		return err
 	}
-	log.Warnf("Encoded message is:\n%v", hex.Dump(bytes))
+	log.Debugf("Encoded message is:\n%v", hex.Dump(bytes))
 	_, err = c.conn.Write(bytes)
 	return err
 }
@@ -168,13 +168,13 @@ func (c *threadSafeConn) processRecvs() {
 
 // processRecvs processes the receive channel
 func (c *threadSafeConn) processRecv(bytes []byte) error {
-	log.Warnf("Obtained bytes to decode are\n%v", hex.Dump(bytes))
+	log.Debugf("Obtained bytes to decode are\n%v", hex.Dump(bytes))
 	msg, err := encoder.PerDecodeE2ApPdu(bytes)
 	if err != nil {
 		log.Warn(err)
 		return err
 	}
-	log.Warnf("Decoded message is:\n%v", msg)
+	log.Debugf("Decoded message is:\n%v", msg)
 	c.recvCh <- *msg
 	return nil
 }
